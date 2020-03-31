@@ -55,15 +55,21 @@ public class MainActivity extends AppCompatActivity {
             case R.id.three:
                 result.append("3");
                 break;
+            case R.id.nul:
+                result.append("0");
+                break;
 
             case R.id.clear:
                 result.setText(null);
                 break;
             case R.id.point:
+                if (firstValues==null){
+                    result.setText("0.");
+                }else{
                 firstValues = Double.valueOf(result.getText().toString());
-                result.setText(firstValues + ".");
+                result.append(".");
                 operation = ".";
-                break;
+                break;}
 
         }
     }
@@ -104,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case "*":
-                            multiplication();
+                            multiply();
                             break;
 
                         case "/":
@@ -127,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         result.setText(firstValues + "-" + secondValues + "=" + result_op);
     }
 
-    public void multiplication() {
+    public void multiply() {
         result_op = firstValues * secondValues;
         result.setText(firstValues + "*" + secondValues + "=" + result_op);
     }
