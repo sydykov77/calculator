@@ -12,26 +12,25 @@ public class MainActivity extends AppCompatActivity {
     TextView result;
     Double firstValues, secondValues, result_op;
     String operation;
-    Double number1;
-    Double number2;
-    String operator;
+    Double saveValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         result = findViewById(R.id.result_field);
-        if (savedInstanceState != null) {
-            number1 = savedInstanceState.getDouble("number1 ");
-            number2 = savedInstanceState.getDouble("number2 ");
-            operator = savedInstanceState.getString("operator ");
-            firstValues = number1;
-            secondValues = number2;
-            operation = operator;
-        }
-
         Log.d("ololo", "onCreate");
-        Log.d("ololo", "Saved Double:"+ number1);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            saveValues = savedInstanceState.getDouble("saveValues");
+            firstValues = saveValues;
+            result.setText(String.valueOf(saveValues));
+        }
+        Log.d("ololo", "onRestoreInstanceState: " + saveValues);
     }
 
 
@@ -185,25 +184,26 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
         Log.d("ololo", "onRestart");
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("ololo","onDestroy");
+        Log.d("ololo", "onDestroy");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("ololo","onPause");
+        Log.d("ololo", "onPause");
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+        if (firstValues != null) {
+            outState.putDouble("saveValues", firstValues);
+        }
         Log.d("ololo", "onSaveInstanceState");
-        outState.putDouble("saved_double",firstValues);
-        outState.putDouble("saved_double",secondValues);
-        outState.putString("saved_double",operator);
     }
-}
 
+}
