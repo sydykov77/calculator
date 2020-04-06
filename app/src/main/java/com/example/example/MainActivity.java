@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     String operation;
 
     Double saveValues;
+    Double saveValues2;
+    String saveOperation;
+    Double saveResult;
 
 
     @Override
@@ -25,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         result = findViewById(R.id.result_field);
+        if (savedInstanceState !=null){
+            saveValues =  savedInstanceState.getDouble("number1 ");
+            saveValues2 =  savedInstanceState.getDouble("number2 ");
+            saveOperation =  savedInstanceState.getString("operation ");
+            firstValues = saveValues;
+            secondValues = saveValues2;
+            operation = saveOperation;
+        }
         Log.d("ololo", "onCreate");
     }
 
@@ -58,16 +69,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ololo", "onDestroy");
     }
 
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState != null) {
-            saveValues = savedInstanceState.getDouble("saveValues");
-            firstValues = saveValues;
-            result.setText(String.valueOf(firstValues));
-        }
-        Log.d("ololo", "onRestoreInstanceState: " + saveValues);
-    }
 
     public void onNumberClick(View view) {
         switch (view.getId()) {
@@ -189,8 +190,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (firstValues != null) {
-            outState.putDouble("saveValues", firstValues);
+        firstValues=saveValues;
+        secondValues=saveValues2;
+        operation=saveOperation;
+
+        if (firstValues != null){
+            outState.putDouble("number1", firstValues);
+        }
+        if (secondValues != null){
+            outState.putDouble("number2", secondValues);
+        }
+        if (operation != null){
+            outState.putString("operator", operation);
         }
         Log.d("ololo", "onSaveInstanceState");
     }
