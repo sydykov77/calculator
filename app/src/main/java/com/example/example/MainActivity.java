@@ -1,8 +1,10 @@
 package com.example.example;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,13 +12,28 @@ public class MainActivity extends AppCompatActivity {
     TextView result;
     Double firstValues, secondValues, result_op;
     String operation;
+    Double number1;
+    Double number2;
+    String operator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         result = findViewById(R.id.result_field);
+        if (savedInstanceState != null) {
+            number1 = savedInstanceState.getDouble("number1 ");
+            number2 = savedInstanceState.getDouble("number2 ");
+            operator = savedInstanceState.getString("operator ");
+            firstValues = number1;
+            secondValues = number2;
+            operation = operator;
+        }
+
+        Log.d("ololo", "onCreate");
+        Log.d("ololo", "Saved Double:"+ number1);
     }
+
 
     public void onNumberClick(View view) {
         switch (view.getId()) {
@@ -63,13 +80,14 @@ public class MainActivity extends AppCompatActivity {
                 result.setText(null);
                 break;
             case R.id.point:
-                if (firstValues==null){
+                if (firstValues == null) {
                     result.setText("0.");
-                }else{
-                firstValues = Double.valueOf(result.getText().toString());
-                result.append(".");
-                operation = ".";
-                break;}
+                } else {
+                    firstValues = Double.valueOf(result.getText().toString());
+                    result.append(".");
+                    operation = ".";
+                    break;
+                }
 
         }
     }
@@ -137,9 +155,55 @@ public class MainActivity extends AppCompatActivity {
         result_op = firstValues * secondValues;
         result.setText(firstValues + "*" + secondValues + "=" + result_op);
     }
-    public void division(){
+
+    public void division() {
         result_op = firstValues / secondValues;
         result.setText(firstValues + "/" + secondValues + "=" + result_op);
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("ololo", "onResume");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("ololo", "onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("ololo", "onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("ololo", "onRestart");
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("ololo","onDestroy");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("ololo","onPause");
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d("ololo", "onSaveInstanceState");
+        outState.putDouble("saved_double",firstValues);
+        outState.putDouble("saved_double",secondValues);
+        outState.putString("saved_double",operator);
+    }
 }
+
