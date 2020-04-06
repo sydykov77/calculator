@@ -12,25 +12,24 @@ public class MainActivity extends AppCompatActivity {
     TextView result;
     Double firstValues, secondValues, result_op;
     String operation;
-    Double saveValues;
+    Double saveNumber1;
+    Double saveNumber2;
+    String saveOperation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         result = findViewById(R.id.result_field);
-        Log.d("ololo", "onCreate");
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState != null) {
-            saveValues = savedInstanceState.getDouble("saveValues");
-            firstValues = saveValues;
-            result.setText(String.valueOf(saveValues));
+        if (savedInstanceState != null){
+            saveNumber1 = savedInstanceState.getDouble("number1");
+            saveNumber2 = savedInstanceState.getDouble("number2");
+            saveOperation = savedInstanceState.getString("operation");
+            firstValues = saveNumber1;
+            secondValues = saveNumber2;
+            operation = saveOperation;
         }
-        Log.d("ololo", "onRestoreInstanceState: " + saveValues);
+        Log.d("ololo", "onCreate");
     }
 
 
@@ -162,48 +161,53 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("ololo", "onResume");
-    }
-
-    @Override
     protected void onStart() {
         super.onStart();
-        Log.d("ololo", "onStart");
+        Log.d("ololo","onStart");
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("ololo","onResume");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("ololo", "onStop");
+        Log.d("ololo","onStop");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("ololo", "onRestart");
+        Log.d("ololo","onRestart");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("ololo", "onDestroy");
+        Log.d("ololo","onDestroy");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("ololo", "onPause");
+        Log.d("ololo","onPause");
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (firstValues != null) {
-            outState.putDouble("saveValues", firstValues);
+        if (firstValues != null){
+            outState.putDouble("number1", firstValues);
         }
-        Log.d("ololo", "onSaveInstanceState");
-    }
+        if (secondValues != null){
+            outState.putDouble("number2", secondValues);
 
+        }
+        if (operation != null){
+            outState.putString("operation", operation);
+        }
+
+    }
 }
