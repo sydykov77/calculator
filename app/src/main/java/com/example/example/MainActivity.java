@@ -24,41 +24,41 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         result = findViewById(R.id.result_field);
         if (savedInstanceState != null) {
-            firstValues = savedInstanceState.getDouble(FIRST);
-            secondValues = savedInstanceState.getDouble(SECOND);
-            operation = savedInstanceState.getString(OPERATION);
+            firstValues = savedInstanceState.getDouble("FIRST");
+            secondValues = savedInstanceState.getDouble("SECOND");
+            operation = savedInstanceState.getString("OPERATION");
         }
-        Log.d("scalc", "onCreate");
+        Log.d("ololo", "onCreate");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("scalc", "onStart");
+        Log.d("ololo", "onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("scalc", "onResume");
+        Log.d("ololo", "onResume");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("scalc", "onStop");
+        Log.d("ololo", "onStop");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("scalc", "onRestart");
+        Log.d("ololo", "onRestart");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("scalc", "onDestroy");
+        Log.d("ololo", "onDestroy");
     }
 
     public void onNumberClick(View view) {
@@ -177,14 +177,15 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         if (firstValues != null) {
-            outState.putDouble(FIRST, firstValues);
+            outState.putDouble("FIRST", firstValues);
         }
         if (secondValues != null) {
-            outState.putDouble(SECOND, secondValues);
+            outState.putDouble("SECOND", secondValues);
         }
         if (operation != null) {
-            outState.putString(OPERATION, operation);
+            outState.putString("OPERATION", operation);
         }
+        Log.d("ololo","onSaveInstanceState");
 
     }
 }
