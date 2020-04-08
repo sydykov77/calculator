@@ -4,9 +4,11 @@ package com.example.example;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
     private static final String FIRST = "FIRST";
     private static final String SECOND = "SECOND";
     private static final String OPERATION = "OPERATION";
+
+
+    static final String RESULT_KEY="result_key";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,19 @@ public class MainActivity extends AppCompatActivity {
             operation = savedInstanceState.getString("OPERATION");
         }
         Log.d("ololo", "onCreate");
+
+
+        Button button = findViewById(R.id.back);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("result",result.getText().toString());
+                setResult(RESULT_OK,intent);
+                finish();
+
+            }
+        });
     }
 
     @Override
@@ -188,4 +208,5 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ololo","onSaveInstanceState");
 
     }
+
 }
