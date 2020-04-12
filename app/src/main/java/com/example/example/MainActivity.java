@@ -21,8 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String OPERATION = "OPERATION";
 
 
-    static final String RESULT_KEY="result_key";
-
+    static final String RESULT_KEY = "result_key";
 
 
     @Override
@@ -30,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         result = findViewById(R.id.result_field);
+
+
         if (savedInstanceState != null) {
             firstValues = savedInstanceState.getDouble("FIRST");
             secondValues = savedInstanceState.getDouble("SECOND");
@@ -43,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("result",result.getText().toString());
-                setResult(RESULT_OK,intent);
+                intent.putExtra("result", result.getText().toString());
+                setResult(RESULT_OK, intent);
                 finish();
 
             }
@@ -205,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         if (operation != null) {
             outState.putString("OPERATION", operation);
         }
-        Log.d("ololo","onSaveInstanceState");
+        Log.d("ololo", "onSaveInstanceState");
 
     }
 
